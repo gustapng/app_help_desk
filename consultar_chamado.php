@@ -12,7 +12,7 @@ $arquivo = fopen('../../../app_help_desk/arquivo.hd', 'r');
 while(!feof($arquivo)) { // testa pelo fim de um arquivo
   //linhas
   $registro = fgets($arquivo);
-  $chamados[] = $registro;
+  //$chamados[] = $registro;
 
   //explode dos detalhes do registro para verificar o id do usuário responsável pelo cadastro
   $registro_detalhes = explode('#', $registro);
@@ -21,15 +21,11 @@ while(!feof($arquivo)) { // testa pelo fim de um arquivo
   if($_SESSION['perfil_id'] == 2) {
 
     //se usuário autenticado não for o usuário de abertura do chamado então não faz nada
-    if($_SESSION['id'] != $registro_detalhes[0]) {
-      continue; //não faz nada
-
-    } else {
+    if($_SESSION['id'] == $registro_detalhes[0]) {
       $chamados[] = $registro; //adiciona o registro do arquivo ao array $chamados
     }
-
   } else {
-    $chamados[] = $registro; //adiciona o registro do arquivo ao array $chamados
+    $chamados[] = $registro; 
   }
 }
 
